@@ -1,0 +1,6 @@
+.nav {
+    display: flex;
+    flex-direction: column;
+    align-content: left;
+    height: 90vh;
+}

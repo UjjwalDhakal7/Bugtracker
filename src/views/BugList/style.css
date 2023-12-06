@@ -3,16 +3,18 @@
 }
 
 .main{
-    width: 100%;
     display: flex;
     flex-direction: column;
+    padding: 0 10px;
 
 
 
     .body-wrap {
-        width: 100%;
+        width: 90%;
         display: flex;
         flex-direction: row;
+        padding: 10px 25px;
+
 
         .sidebar {
             flex-grow: 1;
@@ -21,6 +23,7 @@
         .buglist {
             flex-basis: 80%;
             background-color:#FFFFFF;
+            padding: 0 25px;
 
 
             .buglist-top {
@@ -29,11 +32,7 @@
                 padding: 0 10px;
                 align-items: center;
 
-                .addbtn {
-                    width: 120px;
-                    height: 40px;
-                    border-radius: 10px;
-                }
+               
             }
 
             

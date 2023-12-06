@@ -2,6 +2,8 @@ import react from 'react'
 import Navbar from '../Navbar';
 import Sidebar from '../Sidebar';
 import './style.css';
+import AddBtn from '../Button';
+import PopupForm from '../Forms/AddBug';
 
 function BugList() {
   return (
@@ -12,7 +14,8 @@ function BugList() {
           <div className="buglist">
             <div className="buglist-top">
               <h2>Bug List</h2>
-              <button className='addbtn'>Add Bug</button>
+              {/* <div><AddBtn /></div> */}
+              <div><PopupForm /></div>
             </div>
             <table className='table-main'>
               <tr>

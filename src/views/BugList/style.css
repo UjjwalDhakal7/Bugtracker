@@ -1,6 +1,60 @@
-.nav {
+*{
+    font-family: 'Roboto Flex' ;
+}
+
+.main{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-content: left;
-    height: 90vh;
+
+
+
+    .body-wrap {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+
+        .sidebar {
+            flex-grow: 1;
+        }
+
+        .buglist {
+            flex-basis: 80%;
+            background-color:#FFFFFF;
+
+
+            .buglist-top {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 10px;
+                align-items: center;
+
+                .addbtn {
+                    width: 120px;
+                    height: 40px;
+                    border-radius: 10px;
+                }
+            }
+
+            
+            .table-main {
+                width: 80%;
+                margin: 10px;
+                border: 1px solid black;
+                border-collapse: collapse;
+                text-align: center;
+    
+                .thead{
+                    background-color: #A9A9A9;
+                }
+
+                .thead, td{
+                    border: 1px solid black;
+                    padding: 5px 2px;
+                }
+
+              
+            }
+        }
+    }
 }

@@ -14,6 +14,45 @@ function PopupForm (){
     setShowForm(false);
   };
 
+    const [Project_Id, setProject_Id] = useState('');
+    const [Project_name, setProject_name] = useState('');
+    const [Status, setStatus] = useState('');
+    const [Description, setDescription] = useState('');
+
+    const [errorProject_Id, setProject_Iderror] = useState('');
+    const [errorProject_name, setProject_nameerror] = useState('');
+    const [errorStatus, setStatuserror] = useState('');
+    const [errorDescription, setDescriptionerror] = useState('');
+
+    function validateForm(){
+      var fields = JSON.parse(localStorage.getItem('fields') || "[]")
+      var field = {
+        Project_Id : Project_Id,
+        Project_name : Project_name,
+        Status : Status,
+        Description : Description
+      }
+      fields.push(field);
+      localStorage.setItem('fields', JSON.stringify(fields));
+
+      
+
+      if (Project_Id.length == 0){
+        setProject_Iderror = 'Enter valid Project Id'
+      }
+      if (Project_name.length == 0){
+        setProject_nameerror = 'Enter valid Project_name'
+      }
+      if (Status.length == 0){
+        setStatuserror = 'Enter valid Status'
+      }
+      if (Description.length == 0){
+        setDescriptionerror = 'Enter valid Description'
+      }
+
+      return !(errorProject_Id || errorProject_name || errorStatus || errorDescription);
+    }
+    
   return (
     <div>
       <button onClick={toggleForm}>Add Bug</button>
@@ -25,28 +64,24 @@ function PopupForm (){
             </div>
             <form className="add-bug-form" onSubmit={handleSubmit}>        
                 <label for ="Project_Id">Project_Id :
-                    <input type="text" id="input" name="project_Id" placeholder="Enter project id here"/>
+                    <input type="text" id="input" name="project_Id" placeholder="Project_Id" onChange={(e) => setProject_Id(e.target.value)}/>
+                    {errorProject_Id && <p>{setProject_Iderror}</p>}
                 </label>
                 <label for ="Project_name">Project_name :
-                    <input type="text" id="input" name="project_Id" placeholder="Enter project id here"/>
+                    <input type="text" id="input" name="project_Id" placeholder="Project_name" onChange={(e) => setProject_name(e.target.value)}/>
+                    {errorProject_name && <p>{setProject_nameerror}</p>}
                 </label>
                 <label for ="Status">Status :
-                    <input type="text" id="input" name="status" placeholder="Enter project status here"/>
+                    <input type="text" id="input" name="status" placeholder="Status" onChange={(e) => setStatus(e.target.value)}/>
+                    {errorStatus && <p>{setStatuserror}</p>}
                 </label>
                 <label for ="Description">Description :
-                    <input type="text" id="input" name="description" placeholder="Enter project description here"/>
+                    <input type="text" id="input" name="description" placeholder="Description" onChange={(e) => setDescription(e.target.value)}/>
+                    {errorDescription && <p>{setDescriptionerror}</p>}
                 </label>
-                <label for ="Remarks">Remarks:
-                    <input type="text" id="input" name="Project_Id" placeholder="Enter project id here"/>
-                </label>
-                <div className="bottom-btn">
                 <label for ="Submit">
-                    <input type="button" name="submit" value="Submit"/>
+                <input type="submit" onClick={() => {validateForm()}}/>
                 </label>
-                <label for ="Clear">
-                    <input type="button" name="clear" value="Clear"/>
-                </label>
-                </div>
             </form>
         </div>
       )}
@@ -55,6 +90,9 @@ function PopupForm (){
 };
 
 export default PopupForm;
+
+
+
 
              
         

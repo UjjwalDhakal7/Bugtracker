@@ -1,11 +1,7 @@
 .sidebar {
-    /* width: 20%; */
     padding: 10px 20px;
-    height: 90vh;
-    background-color: #EEF5FF;
 }
 
 ul{
     list-style-type: none;
-
 }

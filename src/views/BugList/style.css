@@ -1,4 +1,7 @@
+
 *{
+    padding: 0;
+    margin: 0;
     font-family: 'Roboto Flex' ;
 }
 
@@ -28,8 +31,22 @@
                 display: flex;
                 justify-content: space-between;
                 padding: 0 10px;
-                align-items: center;               
+                align-items: center;  
             }
+
+            .pop-up {
+                position: fixed;
+                top: 20%;
+                left: 30%;
+                height: 50%;
+                width:50%;
+                z-index: 1;
+                background-color: #f2f2f2;
+                border: 0.5px solid gray;
+                border-radius: 6px ;
+                padding: 0 25px;                
+                }
+        }
 
             .table-main {
                 width: 80%;
@@ -47,6 +64,6 @@
                     padding: 5px 2px;
                 }
             }
-        }
+        
     }
 }

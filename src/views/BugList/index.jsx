@@ -9,6 +9,7 @@ function BugList() {
   const [data, setData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null); 
+  const [dataPriority, setDataPriority] = useState(null);
 
   useEffect(() => {
     const localStorageData = localStorage.getItem('formData');
@@ -16,7 +17,7 @@ function BugList() {
       const formDataArray = JSON.parse(localStorageData);
       setData(formDataArray);
     }
-  }, [data]);
+  }, []);
 
   function deleteItem(index) {
     const updatedData = [...data];
@@ -47,6 +48,14 @@ function BugList() {
     setIsOpen(true);
   };
 
+  const filterPriority = (priority) => {
+    setDataPriority(priority);
+  };
+
+  const filteredData = dataPriority
+    ? data.filter((item) => item.Priority === dataPriority)
+    : data;
+
   return (
     <>
       <div className="main">
@@ -55,7 +64,7 @@ function BugList() {
         </div>
         <div className="body-wrap">
           <div className="sidebar">
-            <Sidebar />
+          <Sidebar filterPriority={filterPriority} />
           </div>
           <div className="buglist">
             <div className="buglist-top">
@@ -69,17 +78,19 @@ function BugList() {
                 <tr>
                   <th>Project_Id</th>
                   <th>Project_Name</th>
+                  <th>Priority</th>
                   <th>Status</th>
                   <th>Description</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {data.length > 0 ? (
-                  data.map((item, index) => (
+                {filteredData.length > 0 ? (
+                  filteredData.map((item, index) => (
                     <tr key={index}>
                       <td>{item.Project_Id}</td>
                       <td>{item.Project_Name}</td>
+                      <td>{item.Priority}</td>
                       <td>{item.Status}</td>
                       <td>{item.Description}</td>
                       <td>
@@ -94,7 +105,7 @@ function BugList() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={5}>There are no bugs as of now.</td>
+                    <td colSpan={6}>There are no bugs as of now.</td>
                   </tr>
                 )}
               </tbody>

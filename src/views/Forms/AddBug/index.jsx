@@ -31,7 +31,6 @@ function PopUpForm(props) {
       Status: formState.Status ? '' : 'Enter Status'
     };
 
-
     if (Object.values(errors).some(error => error)) {
       setFormState({ ...formState, errors });
       return;
@@ -51,15 +50,29 @@ function PopUpForm(props) {
             <input type="text" id="input" value={formState.Project_Name} onChange={e => setFormState({ ...formState, Project_Name: e.target.value })} />
             {formState.errors.Project_Name && <p>{formState.errors.Project_Name}</p>}
           </label>         
+          <label htmlFor="Priority">Priority :<br></br>
+            <select id="Priority" value={formState.Priority} onChange={(e) => setFormState({ ...formState, Priority: e.target.value })}>
+              <option value="blank">------</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+            {formState.errors.Priority && <p>{formState.errors.Priority}</p>}
+          </label>
+          <label htmlFor="Status">Status :
+            <select id="Status" value={formState.Status} onChange={(e) => setFormState({ ...formState, Status: e.target.value })}>
+              <option value="blank">------</option>
+              <option value="Waiting">Waiting</option>
+              <option value="On-Going">On-Going</option>
+              <option value="Completed">Completed</option>
+            </select>
+            {formState.errors.Status && <p>{formState.errors.Status}</p>}
+          </label>
           <label for ="Description">Description :
             <input type="text" id="input" value={formState.Description} onChange={e => setFormState({ ...formState, Description: e.target.value })} />
             {formState.errors.Description && <p>{formState.errors.Description}</p>}
           </label>
        
-          <label for ="Status">Status :
-            <input type="text" id="input" value={formState.Status} onChange={e => setFormState({ ...formState, Status: e.target.value })} />
-            {formState.errors.Status && <p>{formState.errors.Status}</p>}
-          </label>
           <label for ="Submit">
             <input type="submit" value="Submit" />
           </label>

@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 
 function Sidebar({ filterPriority }) {
-  const handlePriorityChange = (e) => {
+  const handlePriority = (e) => {
     const selectedPriority = e.target.value;
     filterPriority(selectedPriority);
   };
@@ -11,7 +11,7 @@ function Sidebar({ filterPriority }) {
     <>
       <aside className='sidebar'>
         <h2>Filters</h2>
-        <select id="Status" onChange={handlePriorityChange}>
+        <select id="Status" onChange={handlePriority}>
           <option value="">------</option>
           <option value="High">High</option>
           <option value="Medium">Medium</option>

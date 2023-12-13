@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from '../NavBar/index.jsx';
 import Sidebar from '../Sidebar/index.jsx';
 import Button from '../Button/index.jsx';
 import Modal from '../Modal/index.jsx';
+import SearchWord from '../Search/index.jsx';
 import './style.css';
 
 function BugList() {
@@ -10,6 +11,7 @@ function BugList() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null); 
   const [dataPriority, setDataPriority] = useState(null);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     const localStorageData = localStorage.getItem('formData');
@@ -43,19 +45,38 @@ function BugList() {
     setIsOpen(false);
   };
 
-  const editData = (index) => {
-    setSelectedItem(index);
+  const editData = (indexof) => {
+    setSelectedItem(indexof);
     setIsOpen(true);
+  };
+
+  const searchBugList = (searchValue, data) => {
+    if (!searchValue) return data;
+
+    const search = searchValue.toLowerCase();
+    return data.filter(
+      (item) =>
+        item.Project_Name.toLowerCase().includes(search) ||
+        item.Description.toLowerCase().includes(search)
+    );
   };
 
   const filterPriority = (priority) => {
     setDataPriority(priority);
   };
 
-  const filteredData = dataPriority
-    ? data.filter((item) => item.Priority === dataPriority)
-    : data;
+  const filteredData = (data, dataPriority) => {
+    if (!dataPriority) return data;
+    return data.filter((item) => item.Priority === dataPriority);
+  };
 
+  const filteredResult = useMemo(() => {
+    let result = data;
+    result = filteredData(result, dataPriority);
+    result = searchBugList(searchValue, result);
+    return result;
+  }, [data, dataPriority, searchValue]);
+  
   return (
     <>
       <div className="main">
@@ -71,6 +92,10 @@ function BugList() {
               <h2>Bug List</h2>
               <Button onClick={toggleModal} title="Add Bug" />
             </div>
+            <SearchWord
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+              />
             <Modal isOpen={isOpen} closeModal={toggleModal} submitData={onAddSuccess} selectedItem={data[selectedItem]}>
             </Modal>
             <table className='table-main'>
@@ -85,8 +110,8 @@ function BugList() {
                 </tr>
               </thead>
               <tbody>
-                {filteredData.length > 0 ? (
-                  filteredData.map((item, index) => (
+                {filteredResult.length > 0 ? (
+                  filteredResult.map((item, index) => (
                     <tr key={index}>
                       <td>{item.Project_Id}</td>
                       <td>{item.Project_Name}</td>

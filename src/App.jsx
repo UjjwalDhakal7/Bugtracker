@@ -1,17 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import react from 'react'
 import './App.css'
 import BugList from './views/BugList'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Dashboard } from './views/Dashboard'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      < BugList/>
-      
-    </>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={< Dashboard/>} />
+          <Route path="/BugList" element={<BugList />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   )
 }
 

@@ -10,10 +10,18 @@ function Navbar() {
     <>
     <div className="topic">
       <div><h1>Bug Buster</h1></div>
-      <ul className='navbar'>
-        <li><Link to ="/"><Button title="Home" className="btn"/></Link></li>
-        <li><Link to ="/Buglist"><Button title="Buglist" className="btn" /></Link></li>
-      </ul>
+      <div className="navbar">
+        <div>
+          <ul className='links'>
+            <li><Link to ="/">Home</Link></li>
+            <li><Link to ="/Buglist">Buglist</Link></li>
+          </ul>
+        </div>
+        <div className="user">
+          <i className="fa-solid fa-user"></i>
+          &nbsp;&nbsp; Phalano
+        </div>
+      </div>
     </div>
     </>
   )

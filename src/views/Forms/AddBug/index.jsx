@@ -6,14 +6,14 @@ function PopUpForm(props) {
     onAddSuccess,
   } = props
   const initialFormState = {
-    Project_Id: '',
+    Bug_Name: '',
     Project_Name: '',
     Status: '',
     Description: '',
     Reportedby:'',
      
     errors: {
-      Project_Id: '',
+      Bug_Name: '',
       Project_Name: '',
       Status: '',
       Description: '',
@@ -27,7 +27,7 @@ function PopUpForm(props) {
     event.preventDefault();
   
     const errors = {
-      Project_Id: formState.Project_Id ? '' : 'Enter Project Id',
+      Bug_Name: formState.Bug_Name ? '' : 'Enter Bug Name ',
       Project_Name: formState.Project_Name ? '' : 'Enter Project Name',
       Description: formState.Description ? '' : 'Enter Valid Description',
       Status: formState.Status ? '' : 'Enter Status',
@@ -44,12 +44,12 @@ function PopUpForm(props) {
   return (
     <div>
       <form className="add-bug-form" onSubmit={handleSubmit}>
-        <h3>Fill Bug Details Below:</h3>    
-          <label for ="Project_Id">Project_Id :
-            <input type="text" id="input" value={formState.Project_Id} onChange={e => setFormState({ ...formState, Project_Id: e.target.value })} />
-            {formState.errors.Project_Id && <p>{formState.errors.Project_Id}</p>}
-          </label>
-          <label for ="Project_name">Project_name :
+        <h3>Fill Bug Details Below:</h3>  
+          <label for ="Bug_Name">Bug Name :
+            <input type="text" id="input" value={formState.Bug_Name} onChange={e => setFormState({ ...formState, Bug_Name: e.target.value })} />
+            {formState.errors.Bug_Name && <p>{formState.errors.Bug_Name}</p>}
+          </label>  
+          <label for ="Project_name">Project Name :
             <input type="text" id="input" value={formState.Project_Name} onChange={e => setFormState({ ...formState, Project_Name: e.target.value })} />
             {formState.errors.Project_Name && <p>{formState.errors.Project_Name}</p>}
           </label>         

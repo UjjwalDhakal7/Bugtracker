@@ -1,9 +1,10 @@
 import React from 'react';
 
-const SearchWord = ({ searchValue, setSearchValue }) => {
+const SearchWord = ({ searchValue, setSearchValue, className }) => {
   return (
     <input
       type="text"
+      className={className}
       value={searchValue}
       onChange={(e) => setSearchValue(e.target.value)}
       placeholder="Search..."
@@ -12,3 +13,5 @@ const SearchWord = ({ searchValue, setSearchValue }) => {
 };
 
 export default SearchWord;
+
+

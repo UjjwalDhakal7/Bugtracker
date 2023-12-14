@@ -10,10 +10,10 @@
     flex-direction: column;
     width: 100%;
     margin: 0 auto;
+    background-color: #f4f9ff;
 
     .nav {
-        background-color: #D2E0FB;
-        padding: 0px 20px;
+        background-color: #d3e8ff;
     }
 
     .body-wrap {
@@ -22,32 +22,41 @@
         flex-direction: row;
         padding: 0px 20px;
         margin: 0 auto;
+        background-color: #f4f9ff;
 
         .sidebar {
             flex-grow: 1;
         }
 
         .buglist {
-            flex-basis: 80%;
-            background-color:#FFFFFF;
-            padding: 0 15px;
+            flex-basis: 85%;
 
             .buglist-top {
                 display: flex;
                 justify-content: space-between;
-                padding-right: 100px;
                 align-items: center;  
+                margin: 20px 0;
+                padding: 0 10px;
 
                 .right {
                     display: flex;
                     gap:1rem;
+
+                    .search {
+                        padding: 5px 20px;
+                        border-radius: 10px;
+                        border: none;
+                        
+                    }
                 }
 
                 .button {
                     padding: 5px 10px;
-                    border: 1px solid #39A7FF;
+                    border: none;
                     border-radius: 6px;
                     font-size: 15px; 
+                    font-weight: bold;
+                    background-color: #81daf3;
                 }
             }
 
@@ -66,20 +75,48 @@
         }
 
             .table-main {
-                width: 80%;
+                width: 95%;
                 margin: 10px;
-                border: 1px solid black;
+                /* border: 1px solid #9CB0C6; */
                 border-collapse: collapse;
-                text-align: center;
+                text-align: left;
                 padding: 0 40px;
     
-                thead{
-                    background-color: #f2f2f2;
+                tr:hover{
+                    background-color: #ffffff;
                 }
 
-                th, td{
-                    border: 1px solid black;
-                    padding: 5px 2px;
+                th{
+                    background-color: #e9f3ff;
+                    padding: 10px 10px;
+                    font-size: 16px;
+                }
+                
+                td{
+                    /* border: 0.5px solid #9CB0C6; */
+                    padding: 5px 10px;
+                    font-size: 14px;
+                }
+
+                .icons {
+                    display: flex;
+                    gap: 0.5rem;
+                    justify-content: left;
+                    border: none;                   
+
+                    .edit-icon {
+                        padding: 10px;
+                        border: none;
+                        background-color: #beb7b7;
+                        border-radius: 40px;                        
+    
+                    }
+                    .delete-icon {
+                        padding: 10px;
+                        border: none;
+                        background-color:#fd5c63;
+                        border-radius: 40px;
+                    }
                 }
             }
         

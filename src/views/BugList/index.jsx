@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import Navbar from '../NavBar/index.jsx';
 import Sidebar from '../Sidebar/index.jsx';
 import Button from '../Button/index.jsx';
@@ -15,6 +15,7 @@ function BugList() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [dataPriority, setDataPriority] = useState(null);
+  const [dataStatus, setDataStatus] = useState(null);
   const [searchValue, setSearchValue] = useState('');
 
   function deleteItem(id) {
@@ -23,8 +24,13 @@ function BugList() {
     localStorage.setItem('formData', JSON.stringify(updatedData));
   }
 
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
+  const openModal = () => {
+    setIsOpen(true);
+    setSelectedItem(null);
+  };
+  
+  const closeModal = () => {
+    setIsOpen(false);
     setSelectedItem(null);
   };
 
@@ -62,13 +68,20 @@ function BugList() {
     setDataPriority(priority);
   };
 
+  const filterStatus = (status) => {
+    setDataStatus(status);
+  };
+
   const filteredData = useMemo(() => {
     let result = data;
     if (dataPriority) {
       result = result.filter((item) => item.Priority === dataPriority);
     }
+    if (dataStatus) {
+      result = result.filter((item) => item.Status === dataStatus);
+    }
     return searchBugList(searchValue, result);
-  }, [data, dataPriority, searchValue]);
+  }, [data, dataPriority, dataStatus, searchValue]);
 
   return (
     <>
@@ -78,51 +91,54 @@ function BugList() {
         </div>
         <div className="body-wrap">
           <div className="sidebar">
-            <Sidebar filterPriority={filterPriority} />
+            <Sidebar filterPriority={filterPriority} filterStatus={filterStatus} />
+            
           </div>
           <div className="buglist">
             <div className="buglist-top">
-              <div className="left"><h2>Bug List</h2></div>
+              <div className="left"><h2>Bugs</h2></div>
               <div className="right">
-              <SearchWord searchValue={searchValue} setSearchValue={setSearchValue} />
-              <Button onClick={toggleModal} title="Add Bug" className="button" />
+              <SearchWord searchValue={searchValue} setSearchValue={setSearchValue} className="search" />
+              <Button onClick={openModal} title="Add Bug" className="button" />
               </div>
             </div>
             <Modal
               isOpen={isOpen}
-              closeModal={toggleModal}
+              closeModal={closeModal}
               submitData={onAddSuccess}
               selectedItem={selectedItem ? data.find(item => item.id === selectedItem) : null}
             />
             <table className="table-main">
               <thead>
-                <tr>
-                  <th>Project Id</th>
-                  <th>Project Name</th>
-                  <th>Priority</th>
-                  <th>Status</th>
-                  <th>Description</th>
-                  <th>Reported By</th>
-                  <th>Actions</th>
+                <tr className='thead'>
+                  <th><i class="fa-solid fa-bug fa-xs"></i>&nbsp;&nbsp;Bug Name</th>
+                  <th><i class="fa-solid fa-diagram-project fa-xs"></i>&nbsp;&nbsp;Project Name</th>
+                  <th><i class="fa-brands fa-superpowers fa-xs"></i>&nbsp;&nbsp;Priority</th>
+                  <th><i class="fa-solid fa-check-double fa-xs"></i>&nbsp;&nbsp;Status</th>
+                  <th><i class="fa-solid fa-circle-info fa-xs"></i>&nbsp;&nbsp;Description</th>
+                  <th><i class="fa-solid fa-user fa-xs"></i>&nbsp;&nbsp;Reported By</th>
+                  <th><i class="fa-solid fa-flag fa-xs"></i>&nbsp;&nbsp;Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredData.length > 0 ? (
                   filteredData.map((item) => (
                     <tr key={item.id}>
-                      <td>{item.id}</td>
+                      <td>{item.Bug_Name}</td>
                       <td>{item.Project_Name}</td>
                       <td>{item.Priority}</td>
                       <td>{item.Status}</td>
                       <td>{item.Description}</td>
                       <td>{item.Reportedby}</td>
                       <td>
-                        <button onClick={() => editData(item.id)}>
+                        <div className="icons">
+                        <button onClick={() => editData(item.id)} className='edit-icon'>
                           <i className="fa-solid fa-file-pen"></i>
                         </button>
-                        <button onClick={() => deleteItem(item.id)}>
+                        <button onClick={() => deleteItem(item.id)} className='delete-icon'>
                           <i className="fa-solid fa-trash"></i>
                         </button>
+                        </div>
                       </td>
                     </tr>
                   ))

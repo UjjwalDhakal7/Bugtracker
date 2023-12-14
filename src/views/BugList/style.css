@@ -5,17 +5,23 @@
     font-family: 'Roboto Flex' ;
 }
 
-.main{
+.main-bug{
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
 
+    .nav {
+        background-color: #D2E0FB;
+        padding: 0px 20px;
+    }
+
     .body-wrap {
-        width: 90%;
+        width: 80%;
         display: flex;
         flex-direction: row;
-        padding: 0px 25px;
+        padding: 0px 20px;
+        margin: 0 auto;
 
         .sidebar {
             flex-grow: 1;
@@ -26,12 +32,23 @@
             background-color:#FFFFFF;
             padding: 0 15px;
 
-
             .buglist-top {
                 display: flex;
                 justify-content: space-between;
-                padding: 0 10px;
+                padding-right: 100px;
                 align-items: center;  
+
+                .right {
+                    display: flex;
+                    gap:1rem;
+                }
+
+                .button {
+                    padding: 5px 10px;
+                    border: 1px solid #39A7FF;
+                    border-radius: 6px;
+                    font-size: 15px; 
+                }
             }
 
             .pop-up {
@@ -54,6 +71,7 @@
                 border: 1px solid black;
                 border-collapse: collapse;
                 text-align: center;
+                padding: 0 40px;
     
                 thead{
                     background-color: #f2f2f2;

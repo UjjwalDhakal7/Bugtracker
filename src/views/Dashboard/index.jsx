@@ -3,9 +3,11 @@ import './style.css'
 
 export function Dashboard(){
     return(
-        <div className="main">
-            <div><h1>Bug Buster</h1></div>
-            <div><Navbar /></div>            
+        <div className="content">
+            <div className="nav"><Navbar /></div>  
+            <div className="main">
+                !! Yo ho Khali Dashboard !!
+            </div>          
         </div>
     )
 }

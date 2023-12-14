@@ -1,8 +1,22 @@
 .topic{
     padding: 20px 50px;
+    background-color: #D2E0FB;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
 }
 
 .navbar {
     display: flex;
     gap: 2rem;
+    margin-left:80px;
+}
+
+.btn {
+    background-color: #AEDEFC;
+    padding: 5px 10px;
+    border: 1px solid #4095e4;
+    border-radius: 6px;
+    font-size: 15px;
 }

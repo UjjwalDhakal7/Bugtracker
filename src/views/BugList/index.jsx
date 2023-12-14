@@ -7,46 +7,43 @@ import SearchWord from '../Search/index.jsx';
 import './style.css';
 
 function BugList() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(() => {
+    const localStorageData = localStorage.getItem('formData');
+    return localStorageData ? JSON.parse(localStorageData) : [];
+  });
+
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null); 
+  const [selectedItem, setSelectedItem] = useState(null);
   const [dataPriority, setDataPriority] = useState(null);
   const [searchValue, setSearchValue] = useState('');
 
-  useEffect(() => {
-    const localStorageData = localStorage.getItem('formData');
-    if (localStorageData) {
-      const formDataArray = JSON.parse(localStorageData);
-      setData(formDataArray);
-    }
-  }, []);
-
-  function deleteItem(index) {
-    const updatedData = [...data];
-    updatedData.splice(index, 1);
+  function deleteItem(id) {
+    const updatedData = data.filter(item => item.id !== id);
     setData(updatedData);
     localStorage.setItem('formData', JSON.stringify(updatedData));
   }
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
-    setSelectedItem(null); 
+    setSelectedItem(null);
   };
 
   const onAddSuccess = (formData) => {
     if (selectedItem !== null) {
-      const updatedData = [...data];
-      updatedData[selectedItem] = formData;
+      const updatedData = data.map(item => (item.id === selectedItem ? formData : item));
       setData(updatedData);
-      setSelectedItem(null); 
+      setSelectedItem(null);
     } else {
-      setData((oldValues) => [...oldValues, formData]);
+      formData.id = Date.now(); 
+      setData((oldValues) => [...oldValues, formData]); 
     }
+    localStorage.setItem('formData', JSON.stringify(data));
     setIsOpen(false);
   };
+  
 
-  const editData = (indexof) => {
-    setSelectedItem(indexof);
+  const editData = (id) => {
+    setSelectedItem(id);
     setIsOpen(true);
   };
 
@@ -65,64 +62,65 @@ function BugList() {
     setDataPriority(priority);
   };
 
-  const filteredData = (data, dataPriority) => {
-    if (!dataPriority) return data;
-    return data.filter((item) => item.Priority === dataPriority);
-  };
-
-  const filteredResult = useMemo(() => {
+  const filteredData = useMemo(() => {
     let result = data;
-    result = filteredData(result, dataPriority);
-    result = searchBugList(searchValue, result);
-    return result;
+    if (dataPriority) {
+      result = result.filter((item) => item.Priority === dataPriority);
+    }
+    return searchBugList(searchValue, result);
   }, [data, dataPriority, searchValue]);
-  
+
   return (
     <>
-      <div className="main">
+      <div className="main-bug">
         <div className="nav">
           <Navbar />
         </div>
         <div className="body-wrap">
           <div className="sidebar">
-          <Sidebar filterPriority={filterPriority} />
+            <Sidebar filterPriority={filterPriority} />
           </div>
           <div className="buglist">
             <div className="buglist-top">
-              <h2>Bug List</h2>
-              <Button onClick={toggleModal} title="Add Bug" />
+              <div className="left"><h2>Bug List</h2></div>
+              <div className="right">
+              <SearchWord searchValue={searchValue} setSearchValue={setSearchValue} />
+              <Button onClick={toggleModal} title="Add Bug" className="button" />
+              </div>
             </div>
-            <SearchWord
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
-              />
-            <Modal isOpen={isOpen} closeModal={toggleModal} submitData={onAddSuccess} selectedItem={data[selectedItem]}>
-            </Modal>
-            <table className='table-main'>
+            <Modal
+              isOpen={isOpen}
+              closeModal={toggleModal}
+              submitData={onAddSuccess}
+              selectedItem={selectedItem ? data.find(item => item.id === selectedItem) : null}
+            />
+            <table className="table-main">
               <thead>
                 <tr>
-                  <th>Project_Id</th>
-                  <th>Project_Name</th>
+                  <th>Project Id</th>
+                  <th>Project Name</th>
                   <th>Priority</th>
                   <th>Status</th>
                   <th>Description</th>
+                  <th>Reported By</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredResult.length > 0 ? (
-                  filteredResult.map((item, index) => (
-                    <tr key={index}>
-                      <td>{item.Project_Id}</td>
+                {filteredData.length > 0 ? (
+                  filteredData.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.id}</td>
                       <td>{item.Project_Name}</td>
                       <td>{item.Priority}</td>
                       <td>{item.Status}</td>
                       <td>{item.Description}</td>
+                      <td>{item.Reportedby}</td>
                       <td>
-                        <button onClick={() => editData(index)}>
+                        <button onClick={() => editData(item.id)}>
                           <i className="fa-solid fa-file-pen"></i>
                         </button>
-                        <button onClick={() => deleteItem(index)}>
+                        <button onClick={() => deleteItem(item.id)}>
                           <i className="fa-solid fa-trash"></i>
                         </button>
                       </td>
@@ -130,7 +128,7 @@ function BugList() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={6}>There are no bugs as of now.</td>
+                    <td colSpan={7}>There are no bugs as of now.</td>
                   </tr>
                 )}
               </tbody>

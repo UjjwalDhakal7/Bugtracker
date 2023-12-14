@@ -10,12 +10,14 @@ function PopUpForm(props) {
     Project_Name: '',
     Status: '',
     Description: '',
+    Reportedby:'',
      
     errors: {
       Project_Id: '',
       Project_Name: '',
       Status: '',
       Description: '',
+      Reportedby:'',
     }
   };
 
@@ -28,7 +30,8 @@ function PopUpForm(props) {
       Project_Id: formState.Project_Id ? '' : 'Enter Project Id',
       Project_Name: formState.Project_Name ? '' : 'Enter Project Name',
       Description: formState.Description ? '' : 'Enter Valid Description',
-      Status: formState.Status ? '' : 'Enter Status'
+      Status: formState.Status ? '' : 'Enter Status',
+      Reportedby: formState.Reportedby ? '' : 'Enter your Name',
     };
 
     if (Object.values(errors).some(error => error)) {
@@ -72,7 +75,10 @@ function PopUpForm(props) {
             <input type="text" id="input" value={formState.Description} onChange={e => setFormState({ ...formState, Description: e.target.value })} />
             {formState.errors.Description && <p>{formState.errors.Description}</p>}
           </label>
-       
+          <label for ="Reportedby">Reported by :
+            <input type="text" id="input" value={formState.Reportedby} onChange={e => setFormState({ ...formState, Reportedby: e.target.value })} />
+            {formState.errors.Reportedby && <p>{formState.errors.Reportedby}</p>}
+          </label>    
           <label for ="Submit">
             <input type="submit" value="Submit" />
           </label>

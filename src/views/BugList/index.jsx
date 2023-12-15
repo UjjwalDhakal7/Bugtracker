@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import Navbar from '../NavBar/index.jsx';
 import Sidebar from '../Sidebar/index.jsx';
 import Button from '../Button/index.jsx';
@@ -18,11 +18,14 @@ function BugList() {
   const [dataStatus, setDataStatus] = useState(null);
   const [searchValue, setSearchValue] = useState('');
 
-  function deleteItem(id) {
-    const updatedData = data.filter(item => item.id !== id);
-    setData(updatedData);
-    localStorage.setItem('formData', JSON.stringify(updatedData));
-  }
+  const deleteItem = useCallback((id) => {
+    const deleteAlert = window.confirm("Are you sure you want to delete this row?");
+    if (deleteAlert) {
+      const updatedData = data.filter(item => item.id !== id);
+      setData(updatedData);
+      localStorage.setItem('formData', JSON.stringify(updatedData));
+    }
+  }, [data, setData]);  
 
   const openModal = () => {
     setIsOpen(true);
@@ -47,22 +50,23 @@ function BugList() {
     setIsOpen(false);
   };
   
-
   const editData = (id) => {
     setSelectedItem(id);
     setIsOpen(true);
   };
 
-  const searchBugList = (searchValue, data) => {
-    if (!searchValue) return data;
-
-    const search = searchValue.toLowerCase();
-    return data.filter(
-      (item) =>
-        item.Project_Name.toLowerCase().includes(search) ||
-        item.Description.toLowerCase().includes(search)
-    );
-  };
+  const searchBugList = useMemo(() => {
+    return (searchValue, data) => {
+      if (!searchValue) return data;
+  
+      const search = searchValue.toLowerCase();
+      return data.filter(
+        (item) =>
+          item.Project_Name.toLowerCase().includes(search) ||
+          item.Description.toLowerCase().includes(search)
+      );
+    };
+  }, []);
 
   const filterPriority = (priority) => {
     setDataPriority(priority);
@@ -96,7 +100,7 @@ function BugList() {
           </div>
           <div className="buglist">
             <div className="buglist-top">
-              <div className="left"><h2>Bugs</h2></div>
+              <h2>Bugs</h2>
               <div className="right">
               <SearchWord searchValue={searchValue} setSearchValue={setSearchValue} className="search" />
               <Button onClick={openModal} title="Add Bug" className="button" />
@@ -132,11 +136,11 @@ function BugList() {
                       <td>{item.Reportedby}</td>
                       <td>
                         <div className="icons">
-                        <button onClick={() => editData(item.id)} className='edit-icon'>
-                          <i className="fa-solid fa-file-pen"></i>
+                        <button onClick={() => editData(item.id)} className='edit-icon' title='edit'>
+                          <i className="fa-solid fa-file-pen fa-lg  "></i>
                         </button>
-                        <button onClick={() => deleteItem(item.id)} className='delete-icon'>
-                          <i className="fa-solid fa-trash"></i>
+                        <button onClick={() => deleteItem(item.id)} className='delete-icon' title='delete'>
+                          <i className="fa-solid fa-trash fa-lg"></i>
                         </button>
                         </div>
                       </td>

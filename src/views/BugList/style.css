@@ -33,20 +33,22 @@
 
             .buglist-top {
                 display: flex;
-                justify-content: space-between;
-                align-items: center;  
+                flex-direction: column;
+                align-items: left; 
                 margin: 20px 0;
                 padding: 0 10px;
 
                 .right {
                     display: flex;
-                    gap:1rem;
+                    justify-content: space-between;
+                    padding-top: 10px;
 
                     .search {
                         padding: 5px 20px;
                         border-radius: 10px;
-                        border: none;
-                        
+                        border: none;     
+                        width: 200px;    
+                        font-size: 16px;              
                     }
                 }
 
@@ -56,7 +58,8 @@
                     border-radius: 6px;
                     font-size: 15px; 
                     font-weight: bold;
-                    background-color: #81daf3;
+                    background-color: #5f9afa;
+                    cursor: pointer;
                 }
             }
 
@@ -75,7 +78,7 @@
         }
 
             .table-main {
-                width: 95%;
+                width: 100%;
                 margin: 10px;
                 /* border: 1px solid #9CB0C6; */
                 border-collapse: collapse;
@@ -88,35 +91,52 @@
 
                 th{
                     background-color: #e9f3ff;
-                    padding: 10px 10px;
+                    padding: 12px 10px;
                     font-size: 16px;
                 }
                 
                 td{
-                    /* border: 0.5px solid #9CB0C6; */
-                    padding: 5px 10px;
+                    padding: 10px 0;
+                    padding-left: 20px;
+                    font-size: 14px;
+                    transition: 0.4s;
+                }
+                td:hover{
+                    padding: 15px 0;
+                    padding-left: 20px;
                     font-size: 14px;
                 }
 
                 .icons {
                     display: flex;
-                    gap: 0.5rem;
+                    gap: 1rem;
                     justify-content: left;
                     border: none;                   
 
                     .edit-icon {
-                        padding: 10px;
-                        border: none;
-                        background-color: #beb7b7;
-                        border-radius: 40px;                        
-    
+                        border: none;                        
+                        border-radius: 40px;   
+                        transition: 0.3s;             
                     }
+
+                    .edit-icon:hover {    
+                        cursor: pointer;                         
+                    }
+
                     .delete-icon {
-                        padding: 10px;
                         border: none;
-                        background-color:#fd5c63;
                         border-radius: 40px;
+                        transition: 0.3s;
+
+                        .fa-trash {
+                            color: #dc7575;
+                        }
                     }
+
+                    .delete-icon:hover {                   
+                    cursor: pointer;
+                    }
+
                 }
             }
         

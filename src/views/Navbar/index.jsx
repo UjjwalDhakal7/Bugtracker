@@ -1,9 +1,6 @@
 import react from 'react'
 import './style.css'
 import { Link } from 'react-router-dom';
-import Button from '../Button';
-import BugList from '../BugList';
-import { Dashboard } from '../Dashboard';
 
 function Navbar() {
   return (

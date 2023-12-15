@@ -1,3 +1,4 @@
+import ChooseDate from '../../Date';
 import './style.css';
 import React, { useState } from "react";
 
@@ -5,11 +6,13 @@ function PopUpForm(props) {
   const {
     onAddSuccess,
   } = props
+
   const initialFormState = {
     Bug_Name: '',
     Project_Name: '',
     Status: '',
     Description: '',
+    // Date:'',
     Reportedby:'',
      
     errors: {
@@ -17,6 +20,7 @@ function PopUpForm(props) {
       Project_Name: '',
       Status: '',
       Description: '',
+      // Date:'',
       Reportedby:'',
     }
   };
@@ -30,7 +34,9 @@ function PopUpForm(props) {
       Bug_Name: formState.Bug_Name ? '' : 'Enter Bug Name ',
       Project_Name: formState.Project_Name ? '' : 'Enter Project Name',
       Description: formState.Description ? '' : 'Enter Valid Description',
-      Status: formState.Status ? '' : 'Enter Status',
+      // Date: formState.Date ? '' : 'Enter Valid Date',
+      Priority: formState.Priority ? '' : 'Choose Priority',
+      Status: formState.Status ? '' : 'Choose Status',
       Reportedby: formState.Reportedby ? '' : 'Enter your Name',
     };
 
@@ -44,17 +50,21 @@ function PopUpForm(props) {
   return (
     <div>
       <form className="add-bug-form" onSubmit={handleSubmit}>
-        <h3>Fill Bug Details Below:</h3>  
-          <label for ="Bug_Name">Bug Name :
+        <h2>Fill Bug Details Below:</h2>  
+
+          <label htmlFor ="Bug_Name">Bug Name :
             <input type="text" id="input" value={formState.Bug_Name} onChange={e => setFormState({ ...formState, Bug_Name: e.target.value })} />
             {formState.errors.Bug_Name && <p>{formState.errors.Bug_Name}</p>}
           </label>  
+
           <label for ="Project_name">Project Name :
             <input type="text" id="input" value={formState.Project_Name} onChange={e => setFormState({ ...formState, Project_Name: e.target.value })} />
             {formState.errors.Project_Name && <p>{formState.errors.Project_Name}</p>}
-          </label>         
+          </label>     
+    
+          <div className="dropdown">
           <label htmlFor="Priority">Priority :<br></br>
-            <select id="Priority" value={formState.Priority} onChange={(e) => setFormState({ ...formState, Priority: e.target.value })}>
+            <select id="Priority" className='drop' value={formState.Priority} onChange={(e) => setFormState({ ...formState, Priority: e.target.value })}>
               <option value="blank">------</option>
               <option value="High">High</option>
               <option value="Medium">Medium</option>
@@ -62,8 +72,9 @@ function PopUpForm(props) {
             </select>
             {formState.errors.Priority && <p>{formState.errors.Priority}</p>}
           </label>
-          <label htmlFor="Status">Status :
-            <select id="Status" value={formState.Status} onChange={(e) => setFormState({ ...formState, Status: e.target.value })}>
+
+          <label htmlFor="Status">Status :<br></br>
+            <select id="Status" className='drop' value={formState.Status} onChange={(e) => setFormState({ ...formState, Status: e.target.value })}>
               <option value="blank">------</option>
               <option value="Waiting">Waiting</option>
               <option value="On-Going">On-Going</option>
@@ -71,17 +82,30 @@ function PopUpForm(props) {
             </select>
             {formState.errors.Status && <p>{formState.errors.Status}</p>}
           </label>
-          <label for ="Description">Description :
+
+          </div>
+          <label htmlFor ="Description">Description :
             <input type="text" id="input" value={formState.Description} onChange={e => setFormState({ ...formState, Description: e.target.value })} />
             {formState.errors.Description && <p>{formState.errors.Description}</p>}
           </label>
-          <label for ="Reportedby">Reported by :
+
+          <label htmlFor='Date'>
+            <div>
+              {/* <ChooseDate /> */}
+               {/* {formState.errors.Date && <p>{formState.errors.Date}</p>} */}
+            </div>
+          </label>
+
+          <label htmlFor ="Reportedby">Reported by :
             <input type="text" id="input" value={formState.Reportedby} onChange={e => setFormState({ ...formState, Reportedby: e.target.value })} />
             {formState.errors.Reportedby && <p>{formState.errors.Reportedby}</p>}
-          </label>    
+          </label>  
+  
+          <div className="btn">
           <label for ="Submit">
-            <input type="submit" value="Submit" />
+            <input type="submit" className="submit" value="Submit" />
           </label>
+          </div>
       </form>                           
     </div>
   );

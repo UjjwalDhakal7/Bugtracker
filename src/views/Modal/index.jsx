@@ -1,8 +1,19 @@
-import React from "react";
+import {React, useState} from "react";
 import './style.css';
 import PopUpForm from '../Forms/AddBug/index.jsx';
 
-function Modal({ isOpen, closeModal, setData, submitData }) {
+function Modal({ isOpen, closeModal, submitData }) {
+
+  const [scrollLock, setScrollLock] = useState(false);
+
+  if (isOpen && !scrollLock) {
+      setScrollLock(true);
+      document.body.style.overflow = 'hidden';
+  } else if (!isOpen && scrollLock) {
+      setScrollLock(false);
+      document.body.style.overflow = 'auto';
+  }
+
     if (!isOpen) {
       return null;
     }
@@ -10,12 +21,14 @@ function Modal({ isOpen, closeModal, setData, submitData }) {
       submitData(arg);
     }
   return (
+      <div class="modal-overlay">
         <div className="modal-main">
           <div className="modal-content">
             <div className="close"><button onClick={closeModal}>X</button></div>
             <PopUpForm onAddSuccess={onAddSuccess} />
           </div>
         </div>
+       </div>
       );
     }
 

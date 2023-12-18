@@ -2,7 +2,8 @@ import {React, useState} from "react";
 import './style.css';
 import PopUpForm from '../Forms/AddBug/index.jsx';
 
-function Modal({ isOpen, closeModal, submitData }) {
+function Modal({ isOpen, closeModal, submitData, selectedItem, bugtoEdit }) {
+  
 
   const [scrollLock, setScrollLock] = useState(false);
 
@@ -25,7 +26,9 @@ function Modal({ isOpen, closeModal, submitData }) {
         <div className="modal-main">
           <div className="modal-content">
             <div className="close"><button onClick={closeModal}>X</button></div>
-            <PopUpForm onAddSuccess={onAddSuccess} />
+            <PopUpForm onAddSuccess={onAddSuccess} 
+           bugtoEdit={selectedItem !== null ? selectedItem : null}
+          />
           </div>
         </div>
        </div>

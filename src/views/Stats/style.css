@@ -1,0 +1,48 @@
+
+
+.display {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 50%;
+    text-align: center;
+    padding: 0 20px;
+    font-size: 18px;
+    font-weight: bold;
+    
+}
+
+.all {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+}
+
+.high {
+    background-color: #ee7076;
+    padding: 10px 30px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.medium {
+    background-color: #9fd7c8;
+    padding: 10px 30px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.low {
+    background-color: #9fc0f5;
+    padding: 10px 30px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

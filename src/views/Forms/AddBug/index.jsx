@@ -1,10 +1,10 @@
 import ChooseDate from '../../Date';
 import './style.css';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function PopUpForm(props) {
   const {
-    onAddSuccess,
+    onAddSuccess, bugtoEdit
   } = props
 
   const initialFormState = {
@@ -12,6 +12,7 @@ function PopUpForm(props) {
     Project_Name: '',
     Status: '',
     Description: '',
+    Priority: '',
     // Date:'',
     Reportedby:'',
      
@@ -20,10 +21,26 @@ function PopUpForm(props) {
       Project_Name: '',
       Status: '',
       Description: '',
+      Priority: '',
       // Date:'',
       Reportedby:'',
     }
   };
+
+  useEffect(() => {
+    if (bugtoEdit) {
+      setFormState(prevState => ({
+        ...prevState,
+        Bug_Name: bugtoEdit.Bug_Name || '',
+        Project_Name: bugtoEdit.Project_Name || '',
+        Status: bugtoEdit.Status || '',
+        Description: bugtoEdit.Description || '',
+        Priority: bugtoEdit.Priority || '',
+        Reportedby: bugtoEdit.Reportedby || '',
+      }));
+    }
+  }, [bugtoEdit]);
+
 
   const [formState, setFormState] = useState(initialFormState);
 
@@ -40,8 +57,8 @@ function PopUpForm(props) {
       Reportedby: formState.Reportedby ? '' : 'Enter your Name',
     };
 
-    if (Object.values(errors).some(error => error)) {
-      setFormState({ ...formState, errors });
+     if (Object.values(errors).some(error => error)) {
+      setFormState(prevState => ({ ...prevState, errors }));
       return;
     }
     onAddSuccess(formState);

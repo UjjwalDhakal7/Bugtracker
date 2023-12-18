@@ -16,7 +16,7 @@ function Navbar() {
         </div>
         <div className="user">
           <i className="fa-solid fa-user"></i>
-          &nbsp;&nbsp; Phalano
+          &nbsp;&nbsp; Ujjwal
         </div>
       </div>
     </div>

@@ -3,10 +3,11 @@
     flex-direction: column;
     gap: 5rem;
     background-color: #f4f9ff;
-    height: 95vh;
+    height: 100vh;
+    
 
     .nav {
-        background-color: #d3e8ff;
+        background-color: #b5d7fa;
         width: 100%;
         margin: 0 auto;
     }
@@ -20,14 +21,25 @@
 
     .sidebar {
         flex-grow: 1;
+        height: 50vh;
     }
     
     .chart {
-        flex-basis: 80%;
+        flex-basis: 100%;
         display: flex;
-        flex-direction: column;
+        justify-content: space-evenly;
         align-content: center;
-        gap: 10rem;
+        height: 60vh;
+
+        .bar {
+            height: 400px;
+            width: 300px;
+        }
+
+        .pie {
+            height: 300px;
+            width: 300px;
+        }
     }
 }
 

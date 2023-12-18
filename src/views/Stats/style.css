@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 1rem;
-    width: 50%;
+    width: 80%;
     text-align: center;
     padding: 0 20px;
     font-size: 18px;
@@ -21,8 +21,8 @@
 }
 
 .high {
-    background-color: #ee7076;
-    padding: 10px 30px;
+    background-color: #eb8388;
+    padding: 20px 60px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -30,8 +30,8 @@
 }
 
 .medium {
-    background-color: #9fd7c8;
-    padding: 10px 30px;
+    background-color: #a9d9ed;
+    padding: 20px 60px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -39,8 +39,8 @@
 }
 
 .low {
-    background-color: #9fc0f5;
-    padding: 10px 30px;
+    background-color: #b1efde;
+    padding: 20px 60px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;

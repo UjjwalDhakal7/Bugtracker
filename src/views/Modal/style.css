@@ -24,10 +24,20 @@
 }
 
 .modal-content {
-  background-color: #cfdbee;
-  padding: 10px 5px;
-  width: 40%;
-  border-radius: 6px;
+  background-color: rgb(238, 241, 250);
+  width: 35%;
+  border-radius: 6px;  
+  padding: 20px 0; 
+  
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(238, 241, 250);
+    padding: 15px 0;
+    margin-bottom: 10px;
+    border-radius: 6px;
+  }
 
   .close{
     display:flex;
@@ -37,7 +47,12 @@
   button{
     border-radius:5px;
     border: 1px solid black;
-    width: 25px;
+    width: 24px;
     height: 20px;
+    margin-right: 70px;
+}
+
+.heading {
+  padding-left: 70px;
 }
 }

@@ -1,7 +1,7 @@
 .sidebar {
     padding: 10px 0;
     background-color: #f4f9ff;
-    height: 95vh;
+    height: 90vh;
 
     .filter {
         display: flex;

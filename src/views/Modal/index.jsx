@@ -25,7 +25,10 @@ function Modal({ isOpen, closeModal, submitData, selectedItem, bugtoEdit }) {
       <div class="modal-overlay">
         <div className="modal-main">
           <div className="modal-content">
+            <div className="topbar">
+            <div className='heading'><h2>Fill Bug Details Below:</h2></div>
             <div className="close"><button onClick={closeModal}>X</button></div>
+            </div>
             <PopUpForm onAddSuccess={onAddSuccess} 
            bugtoEdit={selectedItem !== null ? selectedItem : null}
           />

@@ -66,9 +66,7 @@ function PopUpForm(props) {
 
   return (
     <div>
-      <form className="add-bug-form" onSubmit={handleSubmit}>
-        <h2>Fill Bug Details Below:</h2>  
-
+      <form className="add-bug-form" onSubmit={handleSubmit}> 
           <label htmlFor ="Bug_Name">Bug Name :
             <input type="text" id="input" value={formState.Bug_Name} onChange={e => setFormState({ ...formState, Bug_Name: e.target.value })} />
             {formState.errors.Bug_Name && <p>{formState.errors.Bug_Name}</p>}
@@ -80,7 +78,7 @@ function PopUpForm(props) {
           </label>     
     
           <div className="dropdown">
-          <label htmlFor="Priority">Priority :<br></br>
+          <label htmlFor="Priority">Priority : &nbsp; &nbsp;
             <select id="Priority" className='drop' value={formState.Priority} onChange={(e) => setFormState({ ...formState, Priority: e.target.value })}>
               <option value="blank">------</option>
               <option value="High">High</option>
@@ -90,7 +88,7 @@ function PopUpForm(props) {
             {formState.errors.Priority && <p>{formState.errors.Priority}</p>}
           </label>
 
-          <label htmlFor="Status">Status :<br></br>
+          <label htmlFor="Status">Status : &nbsp; &nbsp;
             <select id="Status" className='drop' value={formState.Status} onChange={(e) => setFormState({ ...formState, Status: e.target.value })}>
               <option value="blank">------</option>
               <option value="Waiting">Waiting</option>

@@ -49,12 +49,12 @@ export function Dashboard(){
                                 mediumPriority,
                                 lowPriority,
                                 ],
-                                backgroundColor: ["red","green","blue"],
+                                backgroundColor: ["#b1efde","#a9d9ed","#eb8388"],
                             },
                         ],
                     }} 
                     options = {{
-                        indexAxis:"y",
+                        indexAxis:"x",
                         responsive:true,
                         maintainAspectRatio: false,
                         scales: {
@@ -84,6 +84,7 @@ export function Dashboard(){
                                         ongoingStatus,
                                         completedStatus,
                                     ],
+                                    backgroundColor: ["#b1efde","#a9d9ed","#eb8388"],
                                 },
                             ],
                         }} 

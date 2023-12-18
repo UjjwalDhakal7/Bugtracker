@@ -35,20 +35,17 @@ return(
             {totalData}
         </div>
         <div className="high">
-        <h3> High </h3>
+            <h3> High </h3>
             {totalHigh}
         </div>
         <div className="medium">
-        <h3> Medium </h3>
+            <h3> Medium </h3>
             {totalMedium}
         </div>
         <div className="low">
-        <h3> Low </h3>
+            <h3> Low </h3>
             {totalLow}
         </div>
-    </div>
-    <div className="main">
-        
     </div>
     </>
 ); 
